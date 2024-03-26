@@ -469,14 +469,10 @@ public class PhotonFeeder extends ReferenceFeeder {
         // slot-location is in front of the picking location.
         Location tapeVector = Location.origin.subtract(offset);
 
-        // Discard any miss alignment, and consider that the feeders are
-        // perfectly aligned as a small miss-alignment would not cause much
-        // problems.
-        if (tapeVector.getLengthX().getValue() > tapeVector.getLengthY().getValue()) {
-            tapeVector = tapeVector.multiply(1, 0, 0, 0);
-        } else {
-            tapeVector = tapeVector.multiply(0, 1, 0, 0);
-        }
+        // Discard any miss alignment, and assume that the feeders are perfectly
+        // aligned and feeding tape along the Y axis only. Any small
+        // miss-alignment should not cause much problems.
+        tapeVector = tapeVector.multiply(0, 1, 0, 0);
 
         // Normalize the tapeVector.
         tapeVector = Location.origin.unitVectorTo(tapeVector);
