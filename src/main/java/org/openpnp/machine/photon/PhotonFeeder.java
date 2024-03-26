@@ -515,6 +515,10 @@ public class PhotonFeeder extends ReferenceFeeder {
 
         // Record the last vision offset in the log used to compute the
         // variance.
+        if (varianceHistory == 0) {
+            // There is no log, do not record anything.
+            return;
+        }
         if (visionOffsetLog == null) {
             visionOffsetLog = new ArrayList(varianceHistory);
         }
